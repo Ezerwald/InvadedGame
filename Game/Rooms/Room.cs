@@ -14,6 +14,7 @@ namespace InvadedGame.Game.Rooms
     public class Room : GameObject
     {
         public RoomState State { get; set; } = RoomState.Powered;
+        public List<Connector> Connectors { get; } = new List<Connector>();
 
         public Room(string name):base(name) { }
 
