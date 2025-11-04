@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InvadedGame.Engine.GameObject
+namespace InvadedGame.Engine
 {
     public abstract class GameObject
     {
