@@ -14,10 +14,11 @@ namespace InvadedGame.Game.Actors
         public Room CurrentRoom { get; internal set; }
         public Controller Controller { get; set; }
 
-        protected Actor(string name, Room startingRoom)
+        protected Actor(string name, Room startingRoom, Controller controller)
             : base(name)
         {
             CurrentRoom = startingRoom;
+            Controller = controller;
         }
     }
 }
