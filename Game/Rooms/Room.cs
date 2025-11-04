@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-using InvadedGame.Engine.GameObject;
+using InvadedGame.Engine;
 
-namespace InvadedGame.Game.Rooms.Room
+namespace InvadedGame.Game.Rooms
 {
     public enum RoomState { Powered, Unpowered }
 
