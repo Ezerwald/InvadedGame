@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InvadedGame.Engine
 {
-    public abstract class GameWorld
+    public class GameWorld
     {
         public List<GameObject> Objects { get; } = new List<GameObject>();
 
