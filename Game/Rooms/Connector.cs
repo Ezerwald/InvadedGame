@@ -30,11 +30,6 @@ namespace InvadedGame.Game.Rooms
             Type = type;
         }
 
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-        }
-
         public override string ToString() =>
             $"{Name}: {Type}, {(IsOpen ? "Open" : "Closed")}";
     }
