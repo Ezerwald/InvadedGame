@@ -15,7 +15,13 @@ namespace InvadedGame.Engine
         public void Update(float deltaTime)
         {
             foreach (var obj in Objects)
-                if (obj.Active) obj.Update(deltaTime);
+                if (obj.Active) obj.Update(this, deltaTime);
         }
+
+        public T? FindObjectOfType<T>() where T : GameObject =>
+            Objects.OfType<T>().FirstOrDefault();
+
+        public IEnumerable<T> FindObjectsOfType<T>() where T : GameObject =>
+            Objects.OfType<T>();
     }
 }
