@@ -28,6 +28,18 @@ namespace InvadedGame.Game.Rooms
             RoomB = b;
             Type = type;
         }
+        
+
+        public Room? GetOtherRoom(Room thisRoom)
+        {
+            if (ReferenceEquals(thisRoom, RoomA))
+                return RoomB;
+
+            if (ReferenceEquals(thisRoom, RoomB))
+                return RoomA;
+
+            return null;
+        }
 
         public override string ToString() =>
             $"{Name}: {Type}, {(IsOpen ? "Open" : "Closed")}";
