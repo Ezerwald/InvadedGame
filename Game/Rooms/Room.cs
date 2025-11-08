@@ -16,5 +16,19 @@ namespace InvadedGame.Game.Rooms
         public Room(string name):base(name) { }
         
         public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
+
+        public Connector? GetConnectorTo(Room TargetRoom)
+        {
+            Connector? resultConnector = null;
+            foreach (var connector in this.Connectors)
+            {
+                if (ReferenceEquals(TargetRoom, connector.GetOtherRoom(TargetRoom)))
+                {
+                    resultConnector = connector;
+                }
+            }
+
+            return resultConnector;
+        }
     }
 }
