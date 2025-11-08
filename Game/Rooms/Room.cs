@@ -8,15 +8,13 @@ using System.Xml.Linq;
 
 namespace InvadedGame.Game.Rooms
 {
-    public enum RoomState { Powered, Unpowered }
-
-    public class Room : GameObject
+    public abstract class Room : GameObject
     {
-        public RoomState State { get; set; } = RoomState.Powered;
+        public bool IsOperational { get; set; } = true;
         public List<Connector> Connectors { get; } = new List<Connector>();
 
         public Room(string name):base(name) { }
         
-        public override string ToString() => $"{Name} ({State})";
+        public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
     }
 }
