@@ -16,7 +16,7 @@ namespace InvadedGame.Game.Rooms
         public List<Connector> Connectors { get; } = new List<Connector>();
 
         public Room(string name):base(name) { }
-
+        
         public override string ToString() => $"{Name} ({State})";
     }
 }

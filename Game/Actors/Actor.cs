@@ -12,6 +12,10 @@ namespace InvadedGame.Game.Actors
     {
         public Room CurrentRoom { get; internal set; }
 
+        // In future:
+        // - add relative location in room for rendering
+        // - add render method
+
         protected Actor(string name, Room startingRoom)
             : base(name)
         {
