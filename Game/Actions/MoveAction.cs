@@ -21,9 +21,24 @@ namespace InvadedGame.Game.Actions
 
         public override void Execute(GameWorld world, Actor actor)
         {
-            // In future: validate connectors, door states, etc.
-            actor.CurrentRoom = TargetRoom;
-            Console.WriteLine($"{actor.Name} moves to {TargetRoom.Name}.");
+            Room actorRoom = actor.CurrentRoom;
+            Connector? connector = actorRoom.GetConnectorTo(this.TargetRoom);
+            if (connector != null)
+            {
+                if (connector.IsOpen)
+                {
+                    actor.CurrentRoom = TargetRoom;
+                    Console.WriteLine($"{actor.Name} moves to {TargetRoom.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine($"Connector between {actorRoom.Name} and {this.TargetRoom.Name} is closed");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"No connector detected between {actorRoom.Name} and {this.TargetRoom.Name}");
+            }
         }
     }
 }
