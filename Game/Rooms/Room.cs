@@ -15,8 +15,6 @@ namespace InvadedGame.Game.Rooms
 
         public Room(string name):base(name) { }
         
-        public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
-
         public Connector? GetConnectorTo(Room TargetRoom)
         {
             Connector? resultConnector = null;
@@ -30,5 +28,8 @@ namespace InvadedGame.Game.Rooms
 
             return resultConnector;
         }
+
+        public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
+
     }
 }
