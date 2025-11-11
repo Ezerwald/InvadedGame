@@ -17,15 +17,26 @@ namespace InvadedGame.Game.Systems
         public void Update(GameWorld world, float deltaTime)
         {
             IEnumerable<Room> rooms = world.FindObjectsOfType<Room>();
+            OxygenTracker? oxygen = world.FindObjectOfType<OxygenTracker>();
+
+            if (oxygen == null)
+            {
+                Console.WriteLine("ERROR: OxygenTracker is not found");
+                return;
+            }
+
             foreach (Room room in rooms)
             {
+                // Empty rooms leakege
                 if ((room is EmptyRoom) && (room.IsOperational == false))
                 {
-                    OxygenTracker? oxygen = world.FindObjectOfType<OxygenTracker>();
-                    if (oxygen != null)
-                    {
-                        oxygen.SpendOxygen(1);
-                    }
+                    oxygen.SpendOxygen(1);
+                }
+
+                // Oxygen generating rooms profit
+                if ((room is OxygenGenRoom) && (room.IsOperational == true))
+                {
+                    oxygen.AddOxygen(1);
                 }
             }
         }
