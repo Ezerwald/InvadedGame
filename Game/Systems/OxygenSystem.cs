@@ -34,7 +34,7 @@ namespace InvadedGame.Game.Systems
                 }
 
                 // Oxygen generating rooms profit
-                if ((room is OxygenGenRoom) && (room.IsOperational == true))
+                if ((room is OxygenRoom) && (room.IsOperational == true))
                 {
                     oxygen.AddOxygen(1);
                 }

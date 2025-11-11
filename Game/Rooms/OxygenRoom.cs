@@ -8,8 +8,8 @@ using InvadedGame.Game.Rooms;
 
 namespace InvadedGame.Game.Rooms
 {
-    public class OxygenGenRoom : Room
+    public class OxygenRoom : Room
     {
-        public OxygenGenRoom(string name) : base(name){}
+        public OxygenRoom(string name) : base(name){}
     }
 }
