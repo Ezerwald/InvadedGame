@@ -14,7 +14,7 @@ namespace InvadedGame.Game.Systems
     {
         public OxygenSystem(string name) : base(name ){}
 
-        public void Update(GameWorld world, float deltaTime)
+        public void ApplyRoundEffects(GameWorld world, float deltaTime)
         {
             IEnumerable<Room> rooms = world.FindObjectsOfType<Room>();
             OxygenTracker? oxygen = world.FindObjectOfType<OxygenTracker>();
