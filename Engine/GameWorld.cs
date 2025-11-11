@@ -10,7 +10,7 @@ namespace InvadedGame.Engine
     {
         public List<GameObject> Objects { get; } = new List<GameObject>();
 
-        public void AddObjects(GameObject obj) => Objects.Add(obj);
+        public void AddObject(GameObject obj) => Objects.Add(obj);
 
         public void Update(float deltaTime)
         {
