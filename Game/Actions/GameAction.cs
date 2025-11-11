@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace InvadedGame.Game.Actions
 {
-    public abstract class Action
+    public abstract class GameAction
     {
         public string Name { get; }
 
-        protected Action(string name)
+        protected GameAction(string name)
         {
             Name = name;
         }

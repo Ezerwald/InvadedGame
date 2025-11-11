@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace InvadedGame.Game.Actions
 {
-    public class MoveAction : Action
+    public class MoveAction : GameAction
     {
         public Room TargetRoom { get; }
 
         public MoveAction(Room targetRoom)
-            : base($"Move to {targetRoom.Name}")
+            : base($"Move to {targetRoom.Name} action")
         {
             TargetRoom = targetRoom;
         }

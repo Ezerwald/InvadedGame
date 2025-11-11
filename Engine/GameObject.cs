@@ -15,6 +15,7 @@ namespace InvadedGame.Engine
         protected GameObject(string name) 
         {
             Name = name;
+            Console.WriteLine($"Game object {name} has been successfully created");
         }
 
         public virtual void Update(GameWorld world, float deltaTime) { }
