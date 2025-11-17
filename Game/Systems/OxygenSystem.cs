@@ -12,6 +12,8 @@ namespace InvadedGame.Game.Systems
 {
     public class OxygenSystem : GameObject
     {
+        bool executedThisRound = false; // for once per round systems
+
         public OxygenSystem(string name) : base(name ){}
 
         public void ApplyRoundEffects(GameWorld world, float deltaTime)
@@ -37,6 +39,26 @@ namespace InvadedGame.Game.Systems
                 if ((room is OxygenRoom) && (room.IsOperational == true))
                 {
                     oxygen.AddOxygen(1);
+                }
+            }
+        }
+
+        public override void Update(GameWorld world, float deltaTime)
+        {
+            base.Update(world, deltaTime);
+
+            PhaseManager? phaseManager = world.FindObjectOfType<PhaseManager>();
+
+            if (phaseManager != null)
+            {
+                if (phaseManager.CurrentPhase == GamePhase.PlanningPhase && executedThisRound)
+                {
+                    executedThisRound = false;
+                }
+                else if (phaseManager.CurrentPhase == GamePhase.EndPhase && !executedThisRound)
+                {
+                    executedThisRound = true;
+                    this.ApplyRoundEffects(world, deltaTime);
                 }
             }
         }
