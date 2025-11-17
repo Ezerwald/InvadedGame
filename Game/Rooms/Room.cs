@@ -11,23 +11,8 @@ namespace InvadedGame.Game.Rooms
     public abstract class Room : GameObject
     {
         public bool IsOperational { get; set; } = true;
-        public List<Connector> Connectors { get; } = new List<Connector>();
 
         public Room(string name):base(name) { }
-        
-        public Connector? GetConnectorTo(Room TargetRoom)
-        {
-            Connector? resultConnector = null;
-            foreach (var connector in this.Connectors)
-            {
-                if (ReferenceEquals(TargetRoom, connector.GetOtherRoom(TargetRoom)))
-                {
-                    resultConnector = connector;
-                }
-            }
-
-            return resultConnector;
-        }
 
         public override void Update(GameWorld world, float deltaTime)
         {

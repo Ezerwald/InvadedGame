@@ -1,5 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace InvadedGame.Game.Actions
         public override void Execute(GameWorld world, Actor actor)
         {
             Room actorRoom = actor.CurrentRoom;
-            Connector? connector = actorRoom.GetConnectorTo(this.TargetRoom);
+            Connector? connector = ConnectorsHelper.GetConnector(actorRoom, this.TargetRoom, world);
             if (connector != null)
             {
                 if (connector.IsOpen)
