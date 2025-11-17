@@ -41,6 +41,7 @@ namespace InvadedGame.Game.Rooms
             return null;
         }
 
+
         public override string ToString() =>
             $"{Name}: {Type}, {(IsOpen ? "Open" : "Closed")}";
     }
