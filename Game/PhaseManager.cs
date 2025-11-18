@@ -20,6 +20,16 @@ namespace InvadedGame.Game
 
         public PhaseManager(string name):base(name) { }
 
+        public void SwitchToNextPhase()
+        {
+            switch (CurrentPhase)
+            {
+                case GamePhase.PlanningPhase: CurrentPhase = GamePhase.ExecutionPhase; break;
+                case GamePhase.ExecutionPhase: CurrentPhase = GamePhase.EndPhase; break;
+                case GamePhase.EndPhase: CurrentPhase = GamePhase.PlanningPhase; break;
+            }
+        }
+
         public override void Update(GameWorld world, float deltaTime)
         {
             if (this.CurrentPhase == GamePhase.PlanningPhase)
