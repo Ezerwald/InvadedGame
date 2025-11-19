@@ -50,7 +50,7 @@ namespace InvadedGame.Game.PhaseManager
             endPhaseSystemsPending--;
 
             if (endPhaseSystemsPending <= 0)
-            {
+    {
                 Console.WriteLine("All End Phase effects finished!");
                 EndPhaseCompleted?.Invoke();
             }
