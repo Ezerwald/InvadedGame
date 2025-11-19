@@ -9,8 +9,8 @@ namespace InvadedGame.Game.Interfaces
 {
     public interface IPhaseController
     {
-        void OnEnter(GameWorld world);
-        void OnExit(GameWorld world);
+        void OnEnter(GameWorld world, float deltaTime);
+        void OnExit(GameWorld world, float deltaTime);
         void Update(GameWorld world, float deltaTime);
     }
 
