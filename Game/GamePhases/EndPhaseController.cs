@@ -17,7 +17,7 @@ namespace InvadedGame.Game.PhaseManager
 
         public EndPhaseController(string name) : base(name) { }
 
-        public void OnEnter(GameWorld world, int deltaTime)
+        public void OnEnter(GameWorld world, float deltaTime)
         {
             Console.WriteLine("Entering End Phase...");
 
@@ -50,10 +50,15 @@ namespace InvadedGame.Game.PhaseManager
             endPhaseSystemsPending--;
 
             if (endPhaseSystemsPending <= 0)
-    {
+            {
                 Console.WriteLine("All End Phase effects finished!");
                 EndPhaseCompleted?.Invoke();
             }
+        }
+
+        public void OnExit(GameWorld world, float deltaTime)
+        {
+            Console.WriteLine("Exiting End Phase");
         }
     }
 }
