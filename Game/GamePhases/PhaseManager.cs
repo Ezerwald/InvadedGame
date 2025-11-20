@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InvadedGame.Game
+namespace InvadedGame.Game.GamePhases
 {
     public enum GamePhase
     {

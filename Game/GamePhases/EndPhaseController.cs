@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InvadedGame.Game.PhaseManager
+namespace InvadedGame.Game.GamePhases
 {
     public class EndPhaseController : GameObject, IPhaseController
     {
