@@ -21,37 +21,38 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Entering End Phase...");
 
-            endPhaseEffects.Clear();
-
-            foreach (var obj in world.Objects)
-            {
-                if (obj is IEndPhaseEffect effect)
-                {
-                    endPhaseEffects.Add(effect);
-                }
-            }
+            endPhaseEffects = world.Objects.OfType<IEndPhaseEffect>().ToList();
 
             endPhaseEffectsPending = endPhaseEffects.Count;
 
             if (endPhaseEffectsPending == 0)
-            {
                 return;
+
+            foreach (var effect in endPhaseEffects)
+            {
+                effect.EndPhaseEffectCompleted += OnEffectCompleted;
             }
 
-            foreach (IEndPhaseEffect obj in endPhaseEffects)
+            foreach (var effect in endPhaseEffects)
             {
-                obj.ExecuteEndPhaseEffect(world, deltaTime);
+                effect.ExecuteEndPhaseEffect(world, deltaTime);
             }
         }
 
-        public void EndPhaseEffectFinished()
+        public void OnEffectCompleted(GameObject effect)
         {
+            Console.WriteLine(effect.Name, " end phase effect completed.");
             endPhaseEffectsPending--;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
             Console.WriteLine("Exiting End Phase");
+
+            foreach (var effect in endPhaseEffects)
+            {
+                effect.EndPhaseEffectCompleted -= OnEffectCompleted;
+            }
         }
     }
 }
