@@ -40,7 +40,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Exiting End Phase");
+            Console.WriteLine("Exiting End Phase.");
 
             foreach (var effect in endPhaseEffects)
             {
