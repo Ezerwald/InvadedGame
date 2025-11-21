@@ -12,10 +12,31 @@ namespace InvadedGame.Engine
 
         public void AddObject(GameObject obj) => Objects.Add(obj);
 
-        public void Update(float deltaTime)
+        public bool Running { get; private set; } = false;
+
+        public void Start()
         {
+            Running = true;
+
+            foreach (GameObject obj in Objects)
+            {
+                obj.Start(this);
+            }
+        }
+
+        public void Update()
+        {
+            float deltaTime = 1;
+
             foreach (var obj in Objects)
-                if (obj.Active) obj.Update(this, deltaTime);
+            {
+                if (!obj.Active)
+                {
+                    return;
+                }
+
+                obj.Update(this, deltaTime);
+            }
         }
 
         public T? FindObjectOfType<T>() where T : GameObject =>
