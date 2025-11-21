@@ -73,7 +73,10 @@ namespace StarshipGame
 
             // World Update (1 loop)
             int deltaTime = 0;
-            world.Update(deltaTime);
+            for (int i = 0; i < 5; i++)
+            {
+                world.Update(deltaTime);
+            }
         }
     }
 }
