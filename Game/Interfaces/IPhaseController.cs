@@ -12,7 +12,6 @@ namespace InvadedGame.Game.Interfaces
         bool IsCompleted { get; }
         void OnEnter(GameWorld world, float deltaTime);
         void OnExit(GameWorld world, float deltaTime);
-        void Update(GameWorld world, float deltaTime);
     }
 
 }
