@@ -5,7 +5,7 @@ namespace InvadedGame.Game.GamePhases
 {
     public class EndPhaseController : IPhaseController
     {
-        public bool IsCompleted => endPhaseEffectsPending <= 0;
+        public bool IsCompleted { get; private set; } = false;
 
         private List<IEndPhaseEffect> endPhaseEffects = new List<IEndPhaseEffect>();
         private int endPhaseEffectsPending = 0;
@@ -45,6 +45,14 @@ namespace InvadedGame.Game.GamePhases
             foreach (var effect in endPhaseEffects)
             {
                 effect.EndPhaseEffectCompleted -= OnEffectCompleted;
+            }
+        }
+
+        public void Update(GameWorld world, float deltaTime)
+        {   
+            if(endPhaseEffectsPending <= 0)
+            {
+                IsCompleted = true;
             }
         }
     }
