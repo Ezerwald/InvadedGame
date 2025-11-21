@@ -1,21 +1,14 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.GamePhases
 {
-    public class EndPhaseController : GameObject, IPhaseController
+    public class EndPhaseController : IPhaseController
     {
         public bool IsCompleted => endPhaseEffectsPending <= 0;
 
         private List<IEndPhaseEffect> endPhaseEffects = new List<IEndPhaseEffect>();
         private int endPhaseEffectsPending = 0;
-
-        public EndPhaseController(string name) : base(name) { }
 
         public void OnEnter(GameWorld world, float deltaTime)
         {

@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace InvadedGame.Game.GamePhases
 {
-    public class ExecutionPhaseController : GameObject, IPhaseController
+    public class ExecutionPhaseController : IPhaseController
     {
         public bool IsCompleted { get; } = true;
-
-        public ExecutionPhaseController(string name) : base(name) { }
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
