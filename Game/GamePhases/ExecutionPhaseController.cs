@@ -6,7 +6,7 @@ namespace InvadedGame.Game.GamePhases
 {
     public class ExecutionPhaseController : IPhaseController
     {
-        public bool IsCompleted => actorsPending <= 0;
+        public bool IsCompleted { get; private set;  } = false;
 
         private List<Actor> activeActors = new List<Actor>();
         private int actorsPending = 0;
@@ -15,14 +15,23 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Entering Execution Phase...");
 
+            TriggerActorsExecution(world);
+            
+        }
+
+        public void TriggerActorsExecution(GameWorld world)
+        {
             var allActors = world.FindObjectsOfType<Actor>();
 
             activeActors = allActors.Where(a => a.HasPlannedActions).ToList();
 
             actorsPending = activeActors.Count;
 
-            if (actorsPending == 0)
+            if (actorsPending < 0)
+            {
+                IsCompleted = true;
                 return;
+            }
 
             foreach (var actor in activeActors)
             {
@@ -44,6 +53,14 @@ namespace InvadedGame.Game.GamePhases
             foreach (var actor in activeActors)
             {
                 actor.ActionCompleted -= OnActorFinished;
+            }
+        }
+
+        public void Update(GameWorld world, float deltaTime)
+        {
+            if (actorsPending < 0 && !IsCompleted)
+            {
+                TriggerActorsExecution(world);
             }
         }
     }
