@@ -27,7 +27,6 @@ namespace InvadedGame.Game.GamePhases
 
         public PhaseManager(
             string name,
-            GameWorld world,
             IPhaseController planning,
             IPhaseController execution,
             IPhaseController end)
