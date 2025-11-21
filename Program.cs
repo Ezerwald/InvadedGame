@@ -65,7 +65,8 @@ namespace StarshipGame
             EndPhaseController endController = new EndPhaseController("End Phase Controller");
             world.AddObject(endController);
 
-            PhaseManager phaseManager = new PhaseManager("Phase Manager", 
+            PhaseManager phaseManager = new PhaseManager("Phase Manager",
+                                                          world,
                                                           planningController, 
                                                           executionController, 
                                                           endController);

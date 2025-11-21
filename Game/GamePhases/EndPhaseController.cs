@@ -41,7 +41,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEffectCompleted(GameObject effect)
         {
-            Console.WriteLine(effect.Name, " end phase effect completed.");
+            Console.WriteLine($"{effect.Name} end phase effect completed.");
             endPhaseEffectsPending--;
         }
 

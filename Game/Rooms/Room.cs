@@ -14,11 +14,6 @@ namespace InvadedGame.Game.Rooms
 
         public Room(string name):base(name) { }
 
-        public override void Update(GameWorld world, float deltaTime)
-        {
-            Console.WriteLine($"Room {this.Name} was updated");
-        }
-
         public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
 
     }
