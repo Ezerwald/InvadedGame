@@ -1,10 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace InvadedGame.Game.GamePhases
 {
@@ -28,16 +24,16 @@ namespace InvadedGame.Game.GamePhases
         public PhaseManager(
             string name,
             GameWorld world,
-            IPhaseController planning,
-            IPhaseController execution,
-            IPhaseController end)
+            IPhaseController planningController,
+            IPhaseController executionController,
+            IPhaseController endController)
             : base(name)
         {
-            planningController = planning;
-            executionController = execution;
-            endController = end;
+            this.planningController = planningController;
+            this.executionController = executionController;
+            this.endController = endController;
 
-            activeController = planningController;
+            activeController = this.planningController;
             activeController.OnEnter(world, 0);
 
             Console.WriteLine($"PhaseManager: Entering initial phase {CurrentPhase.ToString()}");
@@ -47,24 +43,25 @@ namespace InvadedGame.Game.GamePhases
         {
             activeController.OnExit(world, deltaTime);
 
-            CurrentPhase = CurrentPhase switch
+            GamePhase nextPhase = CurrentPhase switch
             {
                 GamePhase.PlanningPhase => GamePhase.ExecutionPhase,
                 GamePhase.ExecutionPhase => GamePhase.EndPhase,
                 GamePhase.EndPhase => GamePhase.PlanningPhase,
-                _ => CurrentPhase
+                _ => throw new UnreachableException(),
             };
 
-            activeController = CurrentPhase switch
+            activeController = nextPhase switch
             {
                 GamePhase.PlanningPhase => planningController,
                 GamePhase.ExecutionPhase => executionController,
                 GamePhase.EndPhase => endController,
-                _ => activeController
+                _ => throw new UnreachableException(),
             };
 
-            Console.WriteLine($"Switched to next Phase: {CurrentPhase.ToString()}");
+            Console.WriteLine($"Switched to next Phase: {nextPhase.ToString()}");
 
+            CurrentPhase = nextPhase;
             activeController.OnEnter(world, deltaTime);
         }
 
