@@ -10,16 +10,48 @@ namespace InvadedGame.Game.Actors
 {
     public abstract class Actor : GameObject
     {
+        public event Action<Actor>? AllActionsPerformed;
+
         public Room CurrentRoom { get; internal set; }
 
-        // In future:
-        // - add relative location in room for rendering
-        // - add render method
-
+        private List<Action> plannedActions = new();
+        
         protected Actor(string name, Room startingRoom)
             : base(name)
         {
             CurrentRoom = startingRoom;
         }
+
+        public void PlanAction(Action action)
+        {
+            plannedActions.Add(action);
+        }
+
+        public void ExecuteNextAction()
+        {
+            if (plannedActions.Count <= 0) 
+            {
+                return;
+            }
+
+            Action action = plannedActions[0];
+            action.Invoke();
+            plannedActions.RemoveAt(0);
+
+            if (plannedActions.Count <= 0)
+            {
+                AllActionsPerformed?.Invoke(this);
+            }
+        }
+
+        public void ClearPlannedActions()
+        {
+            plannedActions.Clear();
+        }
+
+
+        // In future:
+        // - add relative location in room for rendering
+        // - add render method
     }
 }
