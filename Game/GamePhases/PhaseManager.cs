@@ -19,9 +19,23 @@ namespace InvadedGame.Game.GamePhases
     {
         public GamePhase CurrentPhase { get; private set; } = GamePhase.PlanningPhase;
 
-        public PhaseManager(string name) : base(name) { }
+        private IPhaseController planningController;
+        private IPhaseController executionController;
+        private IPhaseController endController;
+
+        public PhaseManager(string name,
+                            IPhaseController planning,
+                            IPhaseController execution,
+                            IPhaseController end) 
+            : base(name) 
+        {
+            planningController = planning;
+            executionController = execution;
+            endController = end;
+        }
 
         public void SwitchToNextPhase(GameWorld world, float deltaTime)
+
         {
             switch (CurrentPhase)
             {
@@ -36,7 +50,6 @@ namespace InvadedGame.Game.GamePhases
             switch (this.CurrentPhase)
             {
                 case GamePhase.PlanningPhase:
-                    var planningController = world.FindObjectOfType<PlanningPhaseController>();
                     if (planningController.IsCompleted)
                     {
                         SwitchToNextPhase(world, deltaTime);
@@ -44,14 +57,13 @@ namespace InvadedGame.Game.GamePhases
                     break;
 
                 case GamePhase.ExecutionPhase:
-                    var executionController = world.FindObjectOfType<ExecutionPhaseController>();
                     if (executionController.IsCompleted)
                     {
                         SwitchToNextPhase(world, deltaTime);
                     }
                     break;
+
                 case GamePhase.EndPhase:
-                    var endController = world.FindObjectOfType<EndPhaseController>();
                     if (endController.IsCompleted)
                     {
                         SwitchToNextPhase(world, deltaTime);
