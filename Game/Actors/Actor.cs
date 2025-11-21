@@ -1,4 +1,5 @@
 ﻿using InvadedGame.Engine;
+using InvadedGame.Game.Actions;
 using InvadedGame.Game.Rooms;
 using System;
 using System.Collections.Generic;
@@ -10,43 +11,61 @@ namespace InvadedGame.Game.Actors
 {
     public abstract class Actor : GameObject
     {
-        public event Action<Actor>? AllActionsCompleted;
+        public event Action<Actor>? ActionCompleted;
 
         public Room CurrentRoom { get; internal set; }
 
-        private List<Action> plannedActions = new();
-        
+        private List<GameAction> plannedActions = new();
+
+        public bool HasPlannedActions => plannedActions.Count > 0;
+
+        public bool pending = false;
+
         protected Actor(string name, Room startingRoom)
             : base(name)
         {
             CurrentRoom = startingRoom;
         }
 
-        public void PlanAction(Action action)
+        public void PlanAction(GameAction action)
         {
             plannedActions.Add(action);
         }
 
-        public void ExecuteNextAction()
+        public void ExecuteNextAction(GameWorld world, float deltaTime)
         {
             if (plannedActions.Count <= 0) 
             {
                 return;
             }
 
-            Action action = plannedActions[0];
-            action.Invoke();
+            var action = plannedActions[0];
             plannedActions.RemoveAt(0);
 
-            if (plannedActions.Count <= 0)
-            {
-                AllActionsCompleted?.Invoke(this);
-            }
+            action.Execute(world, this, deltaTime);
         }
 
-        public void ClearPlannedActions()
+        public void StartExecution()
         {
-            plannedActions.Clear();
+            Console.WriteLine($"Actor {Name} starts action execution. {plannedActions.Count} actions left");
+            pending = true;
+        }
+
+        public void EndExecution() 
+        {
+            Console.WriteLine($"Actor {Name} finished action execution. {plannedActions.Count} actions left");
+            pending = false; 
+        }
+
+        public override void Update(GameWorld world, float deltaTime)
+        {
+            base.Update(world, deltaTime);
+
+            if (pending)
+            {
+                ExecuteNextAction(world, deltaTime);
+                EndExecution();
+            }
         }
 
 

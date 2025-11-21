@@ -1,11 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
 using InvadedGame.Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.GamePhases
 {
@@ -13,29 +8,27 @@ namespace InvadedGame.Game.GamePhases
     {
         public bool IsCompleted => actorsPending <= 0;
 
-        private List<Actor> actors = new List<Actor>();
+        private List<Actor> activeActors = new List<Actor>();
         private int actorsPending = 0;
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
             Console.WriteLine("Entering Execution Phase...");
-            actors = world.Objects.OfType<Actor>().ToList();
 
-            actorsPending = actors.Count;
+            var allActors = world.FindObjectsOfType<Actor>();
+
+            activeActors = allActors.Where(a => a.HasPlannedActions).ToList();
+
+            actorsPending = activeActors.Count;
 
             if (actorsPending == 0)
                 return;
 
-            foreach (var actor in actors)
+            foreach (var actor in activeActors)
             {
-                actor.AllActionsCompleted += OnActorFinished;
+                actor.ActionCompleted += OnActorFinished;
+                actor.StartExecution();
             }
-
-            foreach (var actor in actors)
-            {
-                actor.ExecuteNextAction();
-            }
-
         }
 
         public void OnActorFinished(Actor actor)
@@ -48,9 +41,9 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Exiting Execution Phase.");
 
-            foreach (var actor in actors)
+            foreach (var actor in activeActors)
             {
-                actor.AllActionsCompleted -= OnActorFinished;
+                actor.ActionCompleted -= OnActorFinished;
             }
         }
     }

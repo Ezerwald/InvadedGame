@@ -17,6 +17,6 @@ namespace InvadedGame.Game.Actions
             Name = name;
         }
 
-        public abstract void Execute(GameWorld world, Actor actor);
+        public abstract void Execute(GameWorld world, Actor actor, float deltaTime);
     }
 }
