@@ -27,7 +27,7 @@ namespace InvadedGame.Game.GamePhases
 
             actorsPending = activeActors.Count;
 
-            if (actorsPending < 0)
+            if (actorsPending <= 0)
             {
                 IsCompleted = true;
                 return;
@@ -58,7 +58,9 @@ namespace InvadedGame.Game.GamePhases
 
         public void Update(GameWorld world, float deltaTime)
         {
-            if (actorsPending < 0 && !IsCompleted)
+            Console.WriteLine("Execution phase strategy used");
+
+            if (actorsPending <= 0 && !IsCompleted)
             {
                 TriggerActorsExecution(world);
             }

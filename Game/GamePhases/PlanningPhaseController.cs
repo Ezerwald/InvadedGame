@@ -21,5 +21,10 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Exiting Planning Phase...");
         }
+
+        public void Update(GameWorld world, float deltaTime)
+        {
+            Console.WriteLine("Planning phase strategy used");
+        }
     }
 }

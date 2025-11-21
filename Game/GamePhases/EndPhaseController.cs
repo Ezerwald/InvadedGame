@@ -49,8 +49,10 @@ namespace InvadedGame.Game.GamePhases
         }
 
         public void Update(GameWorld world, float deltaTime)
-        {   
-            if(endPhaseEffectsPending <= 0)
+        {
+            Console.WriteLine("End phase strategy used");
+
+            if (endPhaseEffectsPending <= 0)
             {
                 IsCompleted = true;
             }

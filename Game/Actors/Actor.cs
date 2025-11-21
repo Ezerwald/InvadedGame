@@ -34,20 +34,17 @@ namespace InvadedGame.Game.Actors
 
         public void ExecuteNextAction(GameWorld world, float deltaTime)
         {
-            if (plannedActions.Count <= 0) 
-            {
-                return;
-            }
-
             var action = plannedActions[0];
             plannedActions.RemoveAt(0);
 
             action.Execute(world, this, deltaTime);
+
+            ActionCompleted?.Invoke(this);
         }
 
         public void StartExecution()
         {
-            Console.WriteLine($"Actor {Name} starts action execution. {plannedActions.Count} actions left");
+            Console.WriteLine($"Actor {Name} action execution is triggered. {plannedActions.Count} actions left");
             pending = true;
         }
 
@@ -61,11 +58,13 @@ namespace InvadedGame.Game.Actors
         {
             base.Update(world, deltaTime);
 
-            if (pending)
+            if (!pending)
             {
-                ExecuteNextAction(world, deltaTime);
-                EndExecution();
+                return;
             }
+
+            ExecuteNextAction(world, deltaTime);
+            EndExecution();
         }
 
 

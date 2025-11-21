@@ -40,13 +40,9 @@ namespace StarshipGame
             GameAction breakAction = new BreakRoomAction();
             GameAction repairAction = new RepairRoomAction();
 
-            // Actions Execution 
-
-            List<GameAction> actions = [moveAction, breakAction];
-            foreach (GameAction action in actions)
-            {
-                action.Execute(world, actor1);
-            }
+            // Planning actions for actor
+            actor1.PlanAction(moveAction);
+            actor1.PlanAction(breakAction);
 
             // Oxygen System
             OxygenTracker oxygenTracker = new OxygenTracker("Oxygen Tracker", 5);
