@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 using InvadedGame.Engine;
+using InvadedGame.Game.GamePhases;
+using InvadedGame.Game.Interfaces;
 using InvadedGame.Game.ResourceTrackers;
 using InvadedGame.Game.Rooms;
 
 namespace InvadedGame.Game.Systems
 {
-    public class OxygenSystem : GameObject
+    public class OxygenSystem : GameObject, IEndPhaseEffect
     {
         bool executedThisRound = false; // for once per round systems
 
         public OxygenSystem(string name) : base(name ){}
 
-        public void ApplyRoundEffects(GameWorld world, float deltaTime)
+        public void ExecuteEndPhaseEffect(GameWorld world, float deltaTime)
         {
             IEnumerable<Room> rooms = world.FindObjectsOfType<Room>();
             OxygenTracker? oxygen = world.FindObjectOfType<OxygenTracker>();
@@ -58,7 +60,7 @@ namespace InvadedGame.Game.Systems
                 else if (phaseManager.CurrentPhase == GamePhase.EndPhase && !executedThisRound)
                 {
                     executedThisRound = true;
-                    this.ApplyRoundEffects(world, deltaTime);
+                    this.ExecuteEndPhaseEffect(world, deltaTime);
                 }
             }
         }

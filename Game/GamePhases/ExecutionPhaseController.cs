@@ -10,6 +10,8 @@ namespace InvadedGame.Game.GamePhases
 {
     public class ExecutionPhaseController : GameObject, IPhaseController
     {
+        public bool IsCompleted { get; } = true;
+
         public ExecutionPhaseController(string name) : base(name) { }
 
         public void OnEnter(GameWorld world, float deltaTime)

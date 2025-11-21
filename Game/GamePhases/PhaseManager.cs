@@ -1,4 +1,5 @@
 ﻿using InvadedGame.Engine;
+using InvadedGame.Game.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace InvadedGame.Game.GamePhases
     {
         public GamePhase CurrentPhase { get; private set; } = GamePhase.PlanningPhase;
 
-        public PhaseManager(string name):base(name) { }
+        public PhaseManager(string name) : base(name) { }
 
-        public void SwitchToNextPhase()
+        public void SwitchToNextPhase(GameWorld world, float deltaTime)
         {
             switch (CurrentPhase)
             {
@@ -32,20 +33,29 @@ namespace InvadedGame.Game.GamePhases
 
         public override void Update(GameWorld world, float deltaTime)
         {
-            if (this.CurrentPhase == GamePhase.PlanningPhase)
-            {
-                Console.WriteLine("Planning phase happening");
-            }
             switch (this.CurrentPhase)
             {
                 case GamePhase.PlanningPhase:
-                    Console.WriteLine("Planning phase happening");
+                    var planningController = world.FindObjectOfType<PlanningPhaseController>();
+                    if (planningController.IsCompleted)
+                    {
+                        SwitchToNextPhase(world, deltaTime);
+                    }
                     break;
+
                 case GamePhase.ExecutionPhase:
-                    Console.WriteLine("Execution phase is happening");
+                    var executionController = world.FindObjectOfType<ExecutionPhaseController>();
+                    if (executionController.IsCompleted)
+                    {
+                        SwitchToNextPhase(world, deltaTime);
+                    }
                     break;
                 case GamePhase.EndPhase:
-                    Console.WriteLine("End phase is happening");
+                    var endController = world.FindObjectOfType<EndPhaseController>();
+                    if (endController.IsCompleted)
+                    {
+                        SwitchToNextPhase(world, deltaTime);
+                    }
                     break;
             }
         }

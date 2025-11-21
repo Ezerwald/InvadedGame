@@ -10,10 +10,10 @@ namespace InvadedGame.Game.GamePhases
 {
     public class EndPhaseController : GameObject, IPhaseController
     {
-        public event Action? EndPhaseCompleted;
+        public bool IsCompleted => endPhaseEffectsPending <= 0;
 
         private List<IEndPhaseEffect> endPhaseEffects = new List<IEndPhaseEffect>();
-        private int endPhaseSystemsPending = 0;
+        private int endPhaseEffectsPending = 0;
 
         public EndPhaseController(string name) : base(name) { }
 
@@ -31,11 +31,10 @@ namespace InvadedGame.Game.GamePhases
                 }
             }
 
-            endPhaseSystemsPending = endPhaseEffects.Count;
+            endPhaseEffectsPending = endPhaseEffects.Count;
 
-            if (endPhaseSystemsPending == 0)
+            if (endPhaseEffectsPending == 0)
             {
-                EndPhaseCompleted?.Invoke();
                 return;
             }
 
@@ -45,15 +44,9 @@ namespace InvadedGame.Game.GamePhases
             }
         }
 
-        public void NotifyEndPhaseEffectFinished()
+        public void EndPhaseEffectFinished()
         {
-            endPhaseSystemsPending--;
-
-            if (endPhaseSystemsPending <= 0)
-            {
-                Console.WriteLine("All End Phase effects finished!");
-                EndPhaseCompleted?.Invoke();
-            }
+            endPhaseEffectsPending--;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
