@@ -10,7 +10,7 @@ namespace InvadedGame.Game.Actors
 {
     public abstract class Actor : GameObject
     {
-        public event Action<Actor>? AllActionsPerformed;
+        public event Action<Actor>? AllActionsCompleted;
 
         public Room CurrentRoom { get; internal set; }
 
@@ -40,7 +40,7 @@ namespace InvadedGame.Game.Actors
 
             if (plannedActions.Count <= 0)
             {
-                AllActionsPerformed?.Invoke(this);
+                AllActionsCompleted?.Invoke(this);
             }
         }
 
