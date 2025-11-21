@@ -19,11 +19,13 @@ namespace InvadedGame.Game.ResourceTrackers
         public void SpendOxygen(int spentOxygenValue)
         {
             OxygenValue -= spentOxygenValue;
+            Console.WriteLine("Spent ", spentOxygenValue, " Oxygen. New Oxygen level: ", OxygenValue);
         }
 
         public void AddOxygen(int addedOxygenValue)
         {
             OxygenValue += addedOxygenValue;
+            Console.WriteLine("Added ", addedOxygenValue, " Oxygen. New Oxygen level: ", OxygenValue);
         }
     }
 }

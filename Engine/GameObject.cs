@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace InvadedGame.Engine
 {
@@ -18,6 +19,9 @@ namespace InvadedGame.Engine
             Console.WriteLine($"Game object {name} has been successfully created");
         }
 
-        public virtual void Update(GameWorld world, float deltaTime) { }
+        public virtual void Update(GameWorld world, float deltaTime) 
+        { 
+            Console.WriteLine($"Game object {Name} has been successfully updated");
+        }
     }
 }

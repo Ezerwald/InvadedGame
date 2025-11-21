@@ -23,10 +23,5 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Exiting Execution Phase...");
         }
-
-        public override void Update(GameWorld world, float deltaTime)
-        {
-            // Execution logic (movement, combat, etc.)
-        }
     }
 }

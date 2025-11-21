@@ -23,11 +23,5 @@ namespace InvadedGame.Game.GamePhases
         {
             Console.WriteLine("Exiting Planning Phase...");
         }
-
-        public override void Update(GameWorld world, float deltaTime)
-        {
-            // Planning logic (UI decisions, etc.)
-        }
     }
-
 }

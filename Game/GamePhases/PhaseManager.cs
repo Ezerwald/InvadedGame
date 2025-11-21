@@ -43,10 +43,14 @@ namespace InvadedGame.Game.GamePhases
                 case GamePhase.ExecutionPhase: CurrentPhase = GamePhase.EndPhase; break;
                 case GamePhase.EndPhase: CurrentPhase = GamePhase.PlanningPhase; break;
             }
+
+            Console.WriteLine("Switched to next Phase TODO (Phase Name)");
         }
 
         public override void Update(GameWorld world, float deltaTime)
         {
+            base.Update(world, deltaTime);
+
             switch (this.CurrentPhase)
             {
                 case GamePhase.PlanningPhase:
