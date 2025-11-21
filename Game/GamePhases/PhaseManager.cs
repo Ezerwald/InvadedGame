@@ -70,6 +70,8 @@ namespace InvadedGame.Game.GamePhases
         {
             base.Update(world, deltaTime);
 
+            activeController.Update(world, deltaTime);
+
             if (activeController.IsCompleted)
                 SwitchToNextPhase(world, deltaTime);
         }
