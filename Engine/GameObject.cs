@@ -16,12 +16,12 @@ namespace InvadedGame.Engine
         protected GameObject(string name) 
         {
             Name = name;
-            Console.WriteLine($"Game object {name} has been successfully created");
+            Console.WriteLine($"[CREATED OBJECT]: {Name}");
         }
 
         public virtual void Update(GameWorld world, float deltaTime) 
         { 
-            Console.WriteLine($"Game object {Name} has been successfully updated");
+            Console.WriteLine($"[UPDATED OBJECT]: {Name} ");
         }
     }
 }
