@@ -24,7 +24,7 @@ namespace StarshipGame
             Room room1 = new EmptyRoom("EmptyRoom 1");
             world.AddObject(room1);
 
-            Room room2 = new OxygenRoom("OxygenRoom 1");
+            Room room2 = new EmptyRoom("EmptyRoom 2");
             world.AddObject(room2);
 
             Connector connector1_2 = new Connector(room1, room2, ConnectorType.Corridor, "Connector 1");
@@ -56,27 +56,28 @@ namespace StarshipGame
             world.AddObject(oxygenSystem);
 
             // Phases initialization
-            PlanningPhaseController planningController = new PlanningPhaseController("Planning Phase Controller");
-            world.AddObject(planningController);
+            PlanningPhaseController planningController = new PlanningPhaseController();
 
-            ExecutionPhaseController executionController = new ExecutionPhaseController("Execution Phase Controller");
-            world.AddObject(executionController);
+            ExecutionPhaseController executionController = new ExecutionPhaseController();
             
-            EndPhaseController endController = new EndPhaseController("End Phase Controller");
-            world.AddObject(endController);
+            EndPhaseController endController = new EndPhaseController();
 
-            PhaseManager phaseManager = new PhaseManager("Phase Manager",
-                                                          world,
-                                                          planningController, 
-                                                          executionController, 
-                                                          endController);
+            PhaseManager phaseManager = new PhaseManager(
+                "Phase Manager", 
+                world, 
+                planningController, 
+                executionController, 
+                endController
+            );
             world.AddObject(phaseManager);
 
-            // World Update (1 loop)
-            int deltaTime = 0;
-            for (int i = 0; i < 5; i++)
+            world.Start();
+
+            while (world.Running)
             {
-                world.Update(deltaTime);
+                world.Update();
+
+                Console.Read();
             }
         }
     }
