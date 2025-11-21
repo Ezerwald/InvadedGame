@@ -19,61 +19,62 @@ namespace InvadedGame.Game.GamePhases
     {
         public GamePhase CurrentPhase { get; private set; } = GamePhase.PlanningPhase;
 
-        private IPhaseController planningController;
-        private IPhaseController executionController;
-        private IPhaseController endController;
+        private readonly IPhaseController planningController;
+        private readonly IPhaseController executionController;
+        private readonly IPhaseController endController;
 
-        public PhaseManager(string name,
-                            IPhaseController planning,
-                            IPhaseController execution,
-                            IPhaseController end) 
-            : base(name) 
+        private IPhaseController activeController;
+
+        public PhaseManager(
+            string name,
+            GameWorld world,
+            IPhaseController planning,
+            IPhaseController execution,
+            IPhaseController end)
+            : base(name)
         {
             planningController = planning;
             executionController = execution;
             endController = end;
+
+            activeController = planningController;
+            activeController.OnEnter(world, 0);
+
+            Console.WriteLine($"PhaseManager: Entering initial phase {CurrentPhase.ToString()}");
         }
 
-        public void SwitchToNextPhase(GameWorld world, float deltaTime)
-
+        private void SwitchToNextPhase(GameWorld world, float deltaTime)
         {
-            switch (CurrentPhase)
-            {
-                case GamePhase.PlanningPhase: CurrentPhase = GamePhase.ExecutionPhase; break;
-                case GamePhase.ExecutionPhase: CurrentPhase = GamePhase.EndPhase; break;
-                case GamePhase.EndPhase: CurrentPhase = GamePhase.PlanningPhase; break;
-            }
+            activeController.OnExit(world, deltaTime);
 
-            Console.WriteLine("Switched to next Phase TODO (Phase Name)");
+            CurrentPhase = CurrentPhase switch
+            {
+                GamePhase.PlanningPhase => GamePhase.ExecutionPhase,
+                GamePhase.ExecutionPhase => GamePhase.EndPhase,
+                GamePhase.EndPhase => GamePhase.PlanningPhase,
+                _ => CurrentPhase
+            };
+
+            activeController = CurrentPhase switch
+            {
+                GamePhase.PlanningPhase => planningController,
+                GamePhase.ExecutionPhase => executionController,
+                GamePhase.EndPhase => endController,
+                _ => activeController
+            };
+
+            Console.WriteLine($"Switched to next Phase: {CurrentPhase.ToString()}");
+
+            activeController.OnEnter(world, deltaTime);
         }
+
 
         public override void Update(GameWorld world, float deltaTime)
         {
             base.Update(world, deltaTime);
 
-            switch (this.CurrentPhase)
-            {
-                case GamePhase.PlanningPhase:
-                    if (planningController.IsCompleted)
-                    {
-                        SwitchToNextPhase(world, deltaTime);
-                    }
-                    break;
-
-                case GamePhase.ExecutionPhase:
-                    if (executionController.IsCompleted)
-                    {
-                        SwitchToNextPhase(world, deltaTime);
-                    }
-                    break;
-
-                case GamePhase.EndPhase:
-                    if (endController.IsCompleted)
-                    {
-                        SwitchToNextPhase(world, deltaTime);
-                    }
-                    break;
-            }
+            if (activeController.IsCompleted)
+                SwitchToNextPhase(world, deltaTime);
         }
     }
 }
