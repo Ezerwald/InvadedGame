@@ -13,7 +13,7 @@ namespace InvadedGame.Game.Actions
     {
         public RepairRoomAction() : base($"Break room action") { }
 
-        public override void Execute(GameWorld world, Actor actor)
+        public override void Execute(GameWorld world, Actor actor, float deltaTime)
         {
             Room room = actor.CurrentRoom;
             if (room.IsOperational != true)

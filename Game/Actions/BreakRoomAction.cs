@@ -8,7 +8,7 @@ namespace InvadedGame.Game.Actions
     {
         public BreakRoomAction() : base($"Break room action"){}
 
-        public override void Execute(GameWorld world, Actor actor)
+        public override void Execute(GameWorld world, Actor actor, float deltaTime)
         {
             Room room = actor.CurrentRoom;
 

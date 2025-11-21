@@ -20,7 +20,7 @@ namespace InvadedGame.Game.Actions
             TargetRoom = targetRoom;
         }
 
-        public override void Execute(GameWorld world, Actor actor)
+        public override void Execute(GameWorld world, Actor actor, float deltaTime)
         {
             Room actorRoom = actor.CurrentRoom;
             Connector? connector = ConnectorsHelper.GetConnector(actorRoom, this.TargetRoom, world);
