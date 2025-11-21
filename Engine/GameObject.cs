@@ -18,6 +18,11 @@ namespace InvadedGame.Engine
             Name = name;
             Console.WriteLine($"[CREATED OBJECT]: {Name}");
         }
+        
+        public virtual void Start(GameWorld world)
+        {
+
+        }
 
         public virtual void Update(GameWorld world, float deltaTime) 
         { 
