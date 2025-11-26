@@ -35,7 +35,6 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEffectCompleted(GameObject effect)
         {
-            Logger.LogInfo($"{effect.Name} end phase effect completed.");
             endPhaseEffectsPending--;
         }
 

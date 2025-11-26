@@ -38,8 +38,6 @@ namespace InvadedGame.Game.Systems
 
         public void ExecuteEndPhaseEffect(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Executes end phase effect", this);
-
             IEnumerable<Room>? rooms = world.FindObjectsOfType<Room>();
 
             foreach (var room in rooms)
