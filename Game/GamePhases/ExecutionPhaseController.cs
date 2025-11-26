@@ -11,10 +11,13 @@ namespace InvadedGame.Game.GamePhases
 
         private List<Actor> activeActors = new List<Actor>();
         private int actorsPending = 0;
+        private int round = 0;
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Entering Execution Phase...");
+            //Logger.LogInfo("Entering Execution Phase...");
+
+            round = 0;
 
             TriggerActorsExecution(world);
             
@@ -36,30 +39,32 @@ namespace InvadedGame.Game.GamePhases
 
             foreach (var actor in activeActors)
             {
-                actor.ActionCompleted += OnActorFinished;
+                actor.ActionCompleted += OnActionCompleted;
                 actor.StartExecution();
             }
+
+            round++;
         }
 
-        public void OnActorFinished(Actor actor)
+        public void OnActionCompleted(Actor actor)
         {
-            Logger.LogInfo($"{actor.Name} finished all their actions.");
+            Logger.LogInfo($"Finishes Round *{round}* action.", actor);
             actorsPending--;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Exiting Execution Phase.");
+            //Logger.LogInfo("Exiting Execution Phase.");
 
             foreach (var actor in activeActors)
             {
-                actor.ActionCompleted -= OnActorFinished;
+                actor.ActionCompleted -= OnActionCompleted;
             }
         }
 
         public void Update(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Execution phase strategy used");
+            //Logger.LogInfo("Execution phase strategy used");
 
             if (actorsPending <= 0 && !IsCompleted)
             {

@@ -16,11 +16,11 @@ namespace InvadedGame.Game.Actions
             if (room.IsOperational == true)
             {
                 room.IsOperational = false;
-                Logger.LogInfo($"Room {room.Name} was broken");
+                Logger.LogInfo($"Breaks {room.Name} room", actor);
             }
             else
             {
-                Logger.LogWarning("Room is already broken");
+                Logger.LogWarning($"Room {room.Name} is already broken");
             }
         }
     }

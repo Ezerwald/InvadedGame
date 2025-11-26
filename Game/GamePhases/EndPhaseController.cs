@@ -13,7 +13,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Entering End Phase...");
+            //Logger.LogInfo("Entering End Phase...");
 
             endPhaseEffects = world.Objects.OfType<IEndPhaseEffect>().ToList();
 
@@ -41,7 +41,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("Exiting End Phase.");
+            //Logger.LogInfo("Exiting End Phase.");
 
             foreach (var effect in endPhaseEffects)
             {
@@ -51,7 +51,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void Update(GameWorld world, float deltaTime)
         {
-            Logger.LogInfo("End phase strategy used");
+            //Logger.LogInfo("End phase strategy used");
 
             if (endPhaseEffectsPending <= 0)
             {

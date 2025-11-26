@@ -11,7 +11,7 @@ namespace InvadedGame.Engine
         protected GameObject(string name) 
         {
             Name = name;
-            Logger.LogInfo($"[CREATED OBJECT]: {Name}");
+            Logger.LogInfo($"[CREATE]: {Name}");
         }
         
         public virtual void Start(GameWorld world)
@@ -21,7 +21,7 @@ namespace InvadedGame.Engine
 
         public virtual void Update(GameWorld world, float deltaTime) 
         { 
-            Logger.LogInfo($"[UPDATED OBJECT]: {Name} ");
+            Logger.LogInfo($"[UPDATE]: {Name} ");
         }
     }
 }

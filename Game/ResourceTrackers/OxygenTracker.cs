@@ -15,13 +15,13 @@ namespace InvadedGame.Game.ResourceTrackers
         public void SpendOxygen(int spentOxygenValue)
         {
             OxygenValue -= spentOxygenValue;
-            Logger.LogInfo($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
+            Logger.LogInfo($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
 
         public void AddOxygen(int addedOxygenValue)
         {
             OxygenValue += addedOxygenValue;
-            Logger.LogInfo($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
+            Logger.LogInfo($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
     }
 }

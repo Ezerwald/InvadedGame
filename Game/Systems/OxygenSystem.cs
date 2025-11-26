@@ -23,7 +23,7 @@ namespace InvadedGame.Game.Systems
 
             if (OxygenTracker == null)
             {
-                Logger.LogWarning("OxygenTracker not found");
+                Logger.LogWarning("OxygenTracker not found", this);
                 EndPhaseEffectCompleted?.Invoke(this);
                 return;
             }

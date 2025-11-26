@@ -37,7 +37,7 @@ namespace InvadedGame.Game.GamePhases
             activeController = this.planningController;
             activeController.OnEnter(world, 0);
 
-            Logger.LogInfo($"PhaseManager: Entering initial phase {CurrentPhase.ToString()}");
+            Logger.LogInfo($"Entering initial phase - {CurrentPhase.ToString()}", this);
         }
 
         private void SwitchToNextPhase(GameWorld world, float deltaTime)
@@ -60,7 +60,7 @@ namespace InvadedGame.Game.GamePhases
                 _ => throw new UnreachableException(),
             };
 
-            Logger.LogInfo($"Switched to next Phase: {nextPhase.ToString()}");
+            Logger.LogInfo($"Switched to next Phase - {nextPhase.ToString()}", this);
 
             CurrentPhase = nextPhase;
             activeController.OnEnter(world, deltaTime);
