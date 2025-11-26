@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using InvadedGame.Engine;
+﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actions;
 using InvadedGame.Game.Actors;
 using InvadedGame.Game.GamePhases;
-using InvadedGame.Game.Interfaces;
-using InvadedGame.Game.ResourceTrackers;
 using InvadedGame.Game.Rooms;
 using InvadedGame.Game.Systems;
 
@@ -45,10 +37,7 @@ namespace StarshipGame
             actor1.PlanAction(breakAction);
 
             // Oxygen System
-            OxygenTracker oxygenTracker = new OxygenTracker("Oxygen Tracker", 5);
-            world.AddObject(oxygenTracker);
-
-            OxygenSystem oxygenSystem = new OxygenSystem("Oxygen System", oxygenTracker);
+            OxygenSystem oxygenSystem = new OxygenSystem("Oxygen System", 5);
             world.AddObject(oxygenSystem);
 
             // Phases initialization

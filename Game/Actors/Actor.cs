@@ -40,7 +40,7 @@ namespace InvadedGame.Game.Actors
 
         public void StartExecution()
         {
-            Logger.LogInfo($"Starts action execution ({plannedActions.Count} left)", this);
+            Logger.LogInfo($"Gets order to start action execution ({plannedActions.Count} left)", this);
             pending = true;
         }
 
@@ -60,6 +60,7 @@ namespace InvadedGame.Game.Actors
             }
 
             ExecuteNextAction(world, deltaTime);
+
             EndExecution();
         }
 

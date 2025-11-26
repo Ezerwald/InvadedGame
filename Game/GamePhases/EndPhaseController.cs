@@ -29,7 +29,7 @@ namespace InvadedGame.Game.GamePhases
 
             foreach (var effect in endPhaseEffects)
             {
-                effect.ExecuteEndPhaseEffect(world, deltaTime);
+                effect.StartExecution();
             }
         }
 
