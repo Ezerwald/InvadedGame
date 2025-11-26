@@ -1,9 +1,5 @@
 ﻿using InvadedGame.Engine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InvadedGame.Game.Helpers;
 
 namespace InvadedGame.Game.ResourceTrackers
 {
@@ -19,13 +15,13 @@ namespace InvadedGame.Game.ResourceTrackers
         public void SpendOxygen(int spentOxygenValue)
         {
             OxygenValue -= spentOxygenValue;
-            Console.WriteLine($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
+            Logger.LogInfo($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
         }
 
         public void AddOxygen(int addedOxygenValue)
         {
             OxygenValue += addedOxygenValue;
-            Console.WriteLine($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
+            Logger.LogInfo($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**");
         }
     }
 }

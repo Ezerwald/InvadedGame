@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using InvadedGame.Game.Helpers;
 
 namespace InvadedGame.Engine
 {
@@ -16,7 +11,7 @@ namespace InvadedGame.Engine
         protected GameObject(string name) 
         {
             Name = name;
-            Console.WriteLine($"[CREATED OBJECT]: {Name}");
+            Logger.LogInfo($"[CREATED OBJECT]: {Name}");
         }
         
         public virtual void Start(GameWorld world)
@@ -26,7 +21,7 @@ namespace InvadedGame.Engine
 
         public virtual void Update(GameWorld world, float deltaTime) 
         { 
-            Console.WriteLine($"[UPDATED OBJECT]: {Name} ");
+            Logger.LogInfo($"[UPDATED OBJECT]: {Name} ");
         }
     }
 }

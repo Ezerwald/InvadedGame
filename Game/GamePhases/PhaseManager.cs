@@ -1,4 +1,5 @@
 ﻿using InvadedGame.Engine;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Interfaces;
 using System.Diagnostics;
 
@@ -36,7 +37,7 @@ namespace InvadedGame.Game.GamePhases
             activeController = this.planningController;
             activeController.OnEnter(world, 0);
 
-            Console.WriteLine($"PhaseManager: Entering initial phase {CurrentPhase.ToString()}");
+            Logger.LogInfo($"PhaseManager: Entering initial phase {CurrentPhase.ToString()}");
         }
 
         private void SwitchToNextPhase(GameWorld world, float deltaTime)
@@ -59,7 +60,7 @@ namespace InvadedGame.Game.GamePhases
                 _ => throw new UnreachableException(),
             };
 
-            Console.WriteLine($"Switched to next Phase: {nextPhase.ToString()}");
+            Logger.LogInfo($"Switched to next Phase: {nextPhase.ToString()}");
 
             CurrentPhase = nextPhase;
             activeController.OnEnter(world, deltaTime);

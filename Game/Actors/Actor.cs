@@ -1,11 +1,7 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actions;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.Actors
 {
@@ -44,13 +40,13 @@ namespace InvadedGame.Game.Actors
 
         public void StartExecution()
         {
-            Console.WriteLine($"Actor {Name} action execution is triggered. {plannedActions.Count} actions left");
+            Logger.LogInfo($"Actor {Name} action execution is triggered. {plannedActions.Count} actions left");
             pending = true;
         }
 
         public void EndExecution() 
         {
-            Console.WriteLine($"Actor {Name} finished action execution. {plannedActions.Count} actions left");
+            Logger.LogInfo($"Actor {Name} finished action execution. {plannedActions.Count} actions left");
             pending = false; 
         }
 

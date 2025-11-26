@@ -1,10 +1,6 @@
 ﻿using InvadedGame.Engine;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.GamePhases
 {
@@ -14,17 +10,17 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Entering Planning Phase...");
+            Logger.LogInfo("Entering Planning Phase...");
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Exiting Planning Phase...");
+            Logger.LogInfo("Exiting Planning Phase...");
         }
 
         public void Update(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Planning phase strategy used");
+            Logger.LogInfo("Planning phase strategy used");
         }
     }
 }

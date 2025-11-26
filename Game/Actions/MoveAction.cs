@@ -2,11 +2,6 @@
 using InvadedGame.Game.Actors;
 using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.Actions
 {
@@ -29,16 +24,16 @@ namespace InvadedGame.Game.Actions
                 if (connector.IsOpen)
                 {
                     actor.CurrentRoom = TargetRoom;
-                    Console.WriteLine($"{actor.Name} moves to {TargetRoom.Name}.");
+                    Logger.LogInfo($"{actor.Name} moves to {TargetRoom.Name}.");
                 }
                 else
                 {
-                    Console.WriteLine($"Connector between {actorRoom.Name} and {this.TargetRoom.Name} is closed");
+                    Logger.LogWarning($"Connector between {actorRoom.Name} and {this.TargetRoom.Name} is closed");
                 }
             }
             else
             {
-                Console.WriteLine($"No connector detected between {actorRoom.Name} and {this.TargetRoom.Name}");
+                Logger.LogWarning($"No connector detected between {actorRoom.Name} and {this.TargetRoom.Name}");
             }
         }
     }

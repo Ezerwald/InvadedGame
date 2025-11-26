@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using InvadedGame.Engine;
-using InvadedGame.Game.GamePhases;
+﻿using InvadedGame.Engine;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Interfaces;
 using InvadedGame.Game.ResourceTrackers;
 using InvadedGame.Game.Rooms;
@@ -29,7 +23,7 @@ namespace InvadedGame.Game.Systems
 
             if (OxygenTracker == null)
             {
-                Console.WriteLine("ERROR: OxygenTracker not found");
+                Logger.LogWarning("OxygenTracker not found");
                 EndPhaseEffectCompleted?.Invoke(this);
                 return;
             }

@@ -1,5 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Interfaces;
 
 namespace InvadedGame.Game.GamePhases
@@ -13,7 +14,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Entering Execution Phase...");
+            Logger.LogInfo("Entering Execution Phase...");
 
             TriggerActorsExecution(world);
             
@@ -42,13 +43,13 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnActorFinished(Actor actor)
         {
-            Console.WriteLine($"{actor.Name} finished all their actions.");
+            Logger.LogInfo($"{actor.Name} finished all their actions.");
             actorsPending--;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Exiting Execution Phase.");
+            Logger.LogInfo("Exiting Execution Phase.");
 
             foreach (var actor in activeActors)
             {
@@ -58,7 +59,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void Update(GameWorld world, float deltaTime)
         {
-            Console.WriteLine("Execution phase strategy used");
+            Logger.LogInfo("Execution phase strategy used");
 
             if (actorsPending <= 0 && !IsCompleted)
             {

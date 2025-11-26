@@ -1,11 +1,7 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvadedGame.Game.Actions
 {
@@ -19,11 +15,11 @@ namespace InvadedGame.Game.Actions
             if (room.IsOperational != true)
             {
                 room.IsOperational = true;
-                Console.WriteLine($"Room {room.Name} was repaired");
+                Logger.LogInfo($"Room {room.Name} was repaired");
             }
             else
             {
-                Console.WriteLine("Room doesn't need repairing");
+                Logger.LogInfo("Room doesn't need repairing");
             }
         }
     }

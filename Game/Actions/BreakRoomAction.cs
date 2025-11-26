@@ -1,5 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
+using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
 
 namespace InvadedGame.Game.Actions
@@ -15,11 +16,11 @@ namespace InvadedGame.Game.Actions
             if (room.IsOperational == true)
             {
                 room.IsOperational = false;
-                Console.WriteLine($"Room {room.Name} was broken");
+                Logger.LogInfo($"Room {room.Name} was broken");
             }
             else
             {
-                Console.WriteLine("Room is already broken");
+                Logger.LogWarning("Room is already broken");
             }
         }
     }
