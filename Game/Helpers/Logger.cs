@@ -1,21 +1,47 @@
 ﻿using InvadedGame.Engine;
 using System.Runtime.InteropServices;
+using static System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy;
 
 namespace InvadedGame.Game.Helpers
 {
     public static class Logger
     {
-        private static bool logDebug = true;
-        private static bool logInfo = true;
-        private static bool logWarn = true;
+        public static bool EnableDebug { get; set; } = true;
+        public static bool EnableInfo { get; set; } = true;
+        public static bool EnableWarn { get; set; } = true;
+        public static bool EnableError { get; set; } = true;
 
-        public static void LogDebug(string message) { if (logDebug) { Console.WriteLine($"DEBUG| {message}"); } }
+        private static string Timestamp =>
+            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
-        public static void LogInfo(string message) { if (logInfo) { Console.WriteLine($"| {message}"); } }
-        public static void LogInfo(string message, GameObject obj) { if (logInfo) { Console.WriteLine($"|   {obj.Name}: {message}"); } }
+        private static void Write(string level, string message) =>
+            Console.WriteLine($"{Timestamp} {level,-5}| {message}");
 
-        public static void LogWarning(string message) { if (logWarn) { Console.WriteLine($"WARNING| {message}"); } }
-        public static void LogWarning(string message, GameObject obj) { if (logWarn) { Console.WriteLine($"WARNING| {obj.Name}: {message}"); } }
+        public static void Debug(string message, GameObject? obj = null)
+        {
+            if (EnableDebug)
+                Write("DEBUG", Format(message, obj));
+        }
 
+        public static void Info(string message, GameObject? obj = null)
+        {
+            if (EnableInfo)
+                Write("INFO", Format(message, obj));
+        }
+
+        public static void Warn(string message, GameObject? obj = null)
+        {
+            if (EnableWarn)
+                Write("WARN", Format(message, obj));
+        }
+
+        public static void Error(string message, GameObject? obj = null)
+        {
+            if (EnableError)
+                Write("ERROR", Format(message, obj));
+        }
+
+        private static string Format(string message, GameObject? obj) =>
+            obj == null ? message : $"{obj.Name}: {message}";
     }
 }

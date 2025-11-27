@@ -10,17 +10,15 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            //Logger.LogInfo("Entering Planning Phase...");
+            Logger.Info("Entering Planning Phase...");
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            //Logger.LogInfo("Exiting Planning Phase...");
         }
 
         public void Update(GameWorld world, float deltaTime)
         {
-            //Logger.LogInfo("Planning phase strategy used");
         }
     }
 }

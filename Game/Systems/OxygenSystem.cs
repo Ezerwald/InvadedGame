@@ -21,18 +21,18 @@ namespace InvadedGame.Game.Systems
         public void SpendOxygen(int spentOxygenValue)
         {
             OxygenValue -= spentOxygenValue;
-            Logger.LogInfo($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
+            Logger.Info($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
 
         public void AddOxygen(int addedOxygenValue)
         {
             OxygenValue += addedOxygenValue;
-            Logger.LogInfo($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
+            Logger.Info($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
 
         public void StartExecution()
         {
-            Logger.LogInfo($"Gets order to start end effect execution...", this);
+            Logger.Info($"Gets order to start end effect execution...", this);
             pending = true;
         }
 

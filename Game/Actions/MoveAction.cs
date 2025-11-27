@@ -24,16 +24,16 @@ namespace InvadedGame.Game.Actions
                 if (connector.IsOpen)
                 {
                     actor.CurrentRoom = TargetRoom;
-                    Logger.LogInfo($"Moves to {TargetRoom.Name}.", actor);
+                    Logger.Info($"Moves to {TargetRoom.Name}.", actor);
                 }
                 else
                 {
-                    Logger.LogWarning($"Connector between {actorRoom.Name} and {this.TargetRoom.Name} is closed");
+                    Logger.Warn($"Connector between {actorRoom.Name} and {this.TargetRoom.Name} is closed");
                 }
             }
             else
             {
-                Logger.LogWarning($"No connector detected between {actorRoom.Name} and {this.TargetRoom.Name}");
+                Logger.Warn($"No connector detected between {actorRoom.Name} and {this.TargetRoom.Name}");
             }
         }
     }

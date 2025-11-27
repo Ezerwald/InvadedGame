@@ -15,11 +15,11 @@ namespace InvadedGame.Game.Actions
             if (room.IsOperational != true)
             {
                 room.IsOperational = true;
-                Logger.LogInfo($"Repairs {room.Name} room", actor);
+                Logger.Info($"Repairs {room.Name} room", actor);
             }
             else
             {
-                Logger.LogInfo("Room doesn't need repairing");
+                Logger.Info("Room doesn't need repairing");
             }
         }
     }

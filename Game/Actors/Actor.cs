@@ -40,13 +40,13 @@ namespace InvadedGame.Game.Actors
 
         public void StartExecution()
         {
-            Logger.LogInfo($"Gets order to start action execution ({plannedActions.Count} left)", this);
+            Logger.Info($"Gets order to start action execution ({plannedActions.Count} left)", this);
             pending = true;
         }
 
         public void EndExecution() 
         {
-            Logger.LogInfo($"Finishes action execution ({plannedActions.Count} left)", this);
+            Logger.Info($"Finishes action execution ({plannedActions.Count} left)", this);
             pending = false; 
         }
 
