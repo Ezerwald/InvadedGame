@@ -15,16 +15,16 @@ namespace StarshipGame
             var world = new GameWorld();
 
             // Initialize Rooms
-            Room emptyRoom1 = new EmptyRoom("'EmptyRoom 1'");
+            Room emptyRoom1 = new EmptyRoom("EMPTY ROOM 1");
             world.AddObject(emptyRoom1);
 
-            Room emptyRoom2 = new EmptyRoom("'EmptyRoom 2'");
+            Room emptyRoom2 = new EmptyRoom("EMPTY ROOM  2");
             world.AddObject(emptyRoom2);
 
-            Room oxygenRoom1 = new OxygenRoom("'OxygenGenerator 1'");
+            Room oxygenRoom1 = new OxygenRoom("OXYGEN GENERATOR 1");
             world.AddObject(oxygenRoom1);
 
-            Room oxygenRoom2 = new OxygenRoom("'OxygenGenerator 2'");
+            Room oxygenRoom2 = new OxygenRoom("OXYGEN GENERATOR 2");
             world.AddObject(oxygenRoom2);
 
             // Initialize Connectors
