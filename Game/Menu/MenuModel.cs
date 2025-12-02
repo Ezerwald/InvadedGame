@@ -1,10 +1,23 @@
-﻿using InvadedGame.Game.Actions;
+﻿using InvadedGame.Engine;
+using InvadedGame.Game.Actions;
 using InvadedGame.Game.Actors;
 using InvadedGame.Game.Rooms;
 
 namespace InvadedGame.Game.Menu
 {
     public abstract class MenuModel { }
+
+    public class HomeScreenMenuModel : MenuModel { }
+
+    public class SpaceshipStateMenuModel : MenuModel
+    {
+        public GameWorld World { get; }
+
+        public SpaceshipStateMenuModel(GameWorld world)
+        {
+            World = world;
+        }
+    }
 
     public class ActorsListMenuModel : MenuModel
     {

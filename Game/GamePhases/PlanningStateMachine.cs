@@ -26,12 +26,23 @@ namespace InvadedGame.Game.GamePhases
         public PlanningStateMachine(GameWorld world)
         {
             this.world = world;
-            ShowActorsList();
+            ShowHomeMenu();
         }
 
         // ------------------------------
         // MENU TRANSITIONS
         // ------------------------------
+
+        private void ShowHomeMenu()
+        {
+            CurrentMenu = new HomeScreenMenuModel();
+        }
+
+
+        private void ShowSpaceshipState()
+        {
+            CurrentMenu = new SpaceshipStateMenuModel(world);
+        }
 
         private void ShowActorsList()
         {
@@ -72,6 +83,14 @@ namespace InvadedGame.Game.GamePhases
 
             switch (CurrentMenu)
             {
+                case HomeScreenMenuModel home:
+                    HandleHomeMenuInput(input);
+                    break;
+
+                case SpaceshipStateMenuModel ship:
+                    HandleSpaceshipStateInput(input);
+                    break;
+
                 case ActorsListMenuModel aList:
                     HandleActorsListInput(input, aList);
                     break;
@@ -90,13 +109,40 @@ namespace InvadedGame.Game.GamePhases
             }
         }
 
+        // ---- HOME SCREEN ----
+        private void HandleHomeMenuInput(string input)
+        {
+            switch (input.ToUpper())
+            {
+                case "1":
+                    ShowSpaceshipState();
+                    break;
+
+                case "2":
+                    ShowActorsList();
+                    break;
+
+                case "X":
+                    ShowConfirmExit();
+                    break;
+            }
+        }
+
+        private void HandleSpaceshipStateInput(string input)
+        {
+            if (input.Equals("B", StringComparison.OrdinalIgnoreCase))
+            {
+                ShowHomeMenu();
+            }
+        }
+
         // ---- ACTORS LIST ----
 
         private void HandleActorsListInput(string input, ActorsListMenuModel menu)
         {
-            if (input.Equals("X", StringComparison.OrdinalIgnoreCase))
+            if (input.Equals("B", StringComparison.OrdinalIgnoreCase))
             {
-                ShowConfirmExit();
+                ShowHomeMenu();
                 return;
             }
 
@@ -179,7 +225,7 @@ namespace InvadedGame.Game.GamePhases
 
             if (input.Equals("N", StringComparison.OrdinalIgnoreCase))
             {
-                ShowActorsList();
+                ShowHomeMenu();
             }
         }
 
