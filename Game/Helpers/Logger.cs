@@ -8,9 +8,10 @@ namespace InvadedGame.Game.Helpers
     {
         public static bool EnableLogger { get; set; } = true;
         public static bool EnableDebug { get; set; } = false;
-        public static bool EnableInfo { get; set; } = true;
+        public static bool EnableInfo { get; set; } = false;
         public static bool EnableWarn { get; set; } = true;
         public static bool EnableError { get; set; } = true;
+        public static bool EnableRender { get; set; } = true;
 
         private static string Timestamp =>
             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -20,46 +21,32 @@ namespace InvadedGame.Game.Helpers
 
         public static void Debug(string message, GameObject? obj = null)
         {
-            if (!EnableLogger)
-            {
-                return;
-            }
-
-            if (EnableDebug)
+            if (EnableDebug && EnableLogger)
                 Write("DEBUG", Format(message, obj));
         }
 
         public static void Info(string message, GameObject? obj = null)
         {
-            if (!EnableLogger)
-            {
-                return;
-            }
-
-            if (EnableInfo)
+            if (EnableInfo && EnableLogger)
                 Write("INFO", Format(message, obj));
         }
 
         public static void Warn(string message, GameObject? obj = null)
         {
-            if (!EnableLogger)
-            {
-                return;
-            }
-
-            if (EnableWarn)
+            if (EnableWarn && EnableLogger)
                 Write("WARN", Format(message, obj));
         }
 
         public static void Error(string message, GameObject? obj = null)
         {
-            if (!EnableLogger)
-            {
-                return;
-            }
-
-            if (EnableError)
+            if (EnableError && EnableLogger)
                 Write("ERROR", Format(message, obj));
+        }
+
+        public static void Render(string message, GameObject? obj = null)
+        {
+            if (EnableRender && EnableLogger)
+                Write("RENDER", Format(message, obj));
         }
 
         private static string Format(string message, GameObject? obj) =>

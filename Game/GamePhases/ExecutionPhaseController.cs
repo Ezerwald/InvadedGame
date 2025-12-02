@@ -15,7 +15,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Logger.Info("Entering Execution Phase...");
+            Logger.Render("Entered Execution Phase");
 
             IsCompleted = false;
 
@@ -57,7 +57,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Logger.Info("Exiting Execution Phase");
+            Logger.Render("Exited Execution Phase");
 
             Logger.PauseAndClear();
         }

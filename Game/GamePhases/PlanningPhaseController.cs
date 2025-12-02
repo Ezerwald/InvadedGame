@@ -1,6 +1,7 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Interfaces;
+using InvadedGame.Game.Menu;
 using InvadedGame.InputSystem;
 
 namespace InvadedGame.Game.GamePhases
@@ -15,6 +16,8 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
+            Logger.Render("Entered Planning Phase");
+
             IsCompleted = false;
 
             stateMachine = new PlanningStateMachine(world);
@@ -26,7 +29,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnExit(GameWorld world, float deltaTime)
         {   
-            Logger.Info("Exiting Planning Phase");
+            Logger.Render("Exited Planning Phase");
             Logger.PauseAndClear();
         }
 

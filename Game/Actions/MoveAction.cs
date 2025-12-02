@@ -24,7 +24,7 @@ namespace InvadedGame.Game.Actions
                 if (connector.IsOpen)
                 {
                     actor.CurrentRoom = TargetRoom;
-                    Logger.Info($"Moves to {TargetRoom.Name}.", actor);
+                    Logger.Render($"Moves to {TargetRoom.Name}.", actor);
                 }
                 else
                 {

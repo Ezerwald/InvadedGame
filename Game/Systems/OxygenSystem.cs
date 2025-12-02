@@ -21,13 +21,13 @@ namespace InvadedGame.Game.Systems
         public void SpendOxygen(int spentOxygenValue)
         {
             OxygenValue -= spentOxygenValue;
-            Logger.Info($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
+            Logger.Render($"Spent **{spentOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
 
         public void AddOxygen(int addedOxygenValue)
         {
             OxygenValue += addedOxygenValue;
-            Logger.Info($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
+            Logger.Render($"Added **{addedOxygenValue}** Oxygen. New Oxygen level: **{OxygenValue}**", this);
         }
 
         public void StartExecution()
