@@ -7,7 +7,7 @@ namespace InvadedGame.Game.Actions
 {
     public class RepairRoomAction : GameAction
     {
-        public RepairRoomAction() : base($"Break room action") { }
+        public RepairRoomAction() : base($"Repair room action") { }
 
         public override void Execute(GameWorld world, Actor actor, float deltaTime)
         {
@@ -19,7 +19,7 @@ namespace InvadedGame.Game.Actions
             }
             else
             {
-                Logger.Info("Room doesn't need repairing");
+                Logger.Info($"Room {room.Name} doesn't need repairing", actor);
             }
         }
     }

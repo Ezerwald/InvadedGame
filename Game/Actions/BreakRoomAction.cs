@@ -20,7 +20,7 @@ namespace InvadedGame.Game.Actions
             }
             else
             {
-                Logger.Warn($"Room {room.Name} is already broken");
+                Logger.Warn($"Room {room.Name} is already broken", actor);
             }
         }
     }
