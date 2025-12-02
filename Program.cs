@@ -21,8 +21,17 @@ namespace StarshipGame
             Room emptyRoom2 = new EmptyRoom("'EmptyRoom 2'");
             world.AddObject(emptyRoom2);
 
+            Room oxygenRoom1 = new OxygenRoom("'OxygenGenerator 1'");
+            world.AddObject(oxygenRoom1);
+
+            Room oxygenRoom2 = new OxygenRoom("'OxygenGenerator 2'");
+            world.AddObject(oxygenRoom2);
+
             // Initialize Connectors
             world.AddObject(new Connector(emptyRoom1, emptyRoom2, ConnectorType.Corridor, "Connector 1"));
+            world.AddObject(new Connector(emptyRoom2, oxygenRoom1, ConnectorType.Corridor, "Connector 2"));
+            world.AddObject(new Connector(oxygenRoom1, oxygenRoom2, ConnectorType.Corridor, "Connector 3"));
+            world.AddObject(new Connector(oxygenRoom2, emptyRoom1, ConnectorType.Corridor, "Connector 4"));
 
             // Initialize Actors
             world.AddObject(new CrewActor("Vlad", emptyRoom1));
