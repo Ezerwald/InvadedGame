@@ -15,6 +15,8 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
+            IsCompleted = false;
+
             round = 0;
 
             TriggerActorsExecution(world);
