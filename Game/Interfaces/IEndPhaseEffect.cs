@@ -7,7 +7,7 @@ namespace InvadedGame.Game.Interfaces
         void StartExecution();
         void ExecuteEndPhaseEffect(GameWorld world, float deltaTime);
 
-        event Action<GameObject>? EndPhaseEffectCompleted; 
+        event Action<IEndPhaseEffect>? EndPhaseEffectCompleted; 
     }
 
 }
