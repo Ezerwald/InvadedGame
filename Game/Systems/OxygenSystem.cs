@@ -7,7 +7,7 @@ namespace InvadedGame.Game.Systems
 {
     public class OxygenSystem : GameObject, IEndPhaseEffect
     {
-        public event Action<GameObject>? EndPhaseEffectCompleted;
+        public event Action<IEndPhaseEffect>? EndPhaseEffectCompleted;
 
         public int OxygenValue = 0;
 
@@ -43,10 +43,19 @@ namespace InvadedGame.Game.Systems
             foreach (var room in rooms)
             {
                 if (room is EmptyRoom && !room.IsOperational)
+                {
                     SpendOxygen(1);
-
-                if (room is OxygenRoom && room.IsOperational)
+                }    
+                    
+                else if (room is OxygenRoom && room.IsOperational)
+                {
                     AddOxygen(1);
+                }
+                    
+                else
+                {
+                    Logger.Info($"No oxygen leakage detected in room {room.Name}.", this);
+                }
             }
 
             EndPhaseEffectCompleted?.Invoke(this);
