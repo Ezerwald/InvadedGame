@@ -11,9 +11,11 @@ namespace InvadedGame.Game.Actors
 
         public Room CurrentRoom { get; internal set; }
 
-        private List<GameAction> plannedActions = new();
+        public Room DestinationRoom { get; internal set; }
 
-        public bool HasPlannedActions => plannedActions.Count > 0;
+        public List<GameAction> PlannedActions = new();
+
+        public bool HasPlannedActions => PlannedActions.Count > 0;
 
         public bool pending = false;
 
@@ -21,17 +23,18 @@ namespace InvadedGame.Game.Actors
             : base(name)
         {
             CurrentRoom = startingRoom;
+            DestinationRoom = startingRoom;
         }
 
         public void PlanAction(GameAction action)
         {
-            plannedActions.Add(action);
+            PlannedActions.Add(action);
         }
 
         public void ExecuteNextAction(GameWorld world, float deltaTime)
         {
-            var action = plannedActions[0];
-            plannedActions.RemoveAt(0);
+            var action = PlannedActions[0];
+            PlannedActions.RemoveAt(0);
 
             action.Execute(world, this, deltaTime);
 
@@ -40,14 +43,17 @@ namespace InvadedGame.Game.Actors
 
         public void StartExecution()
         {
-            Logger.Info($"Gets order to start action execution ({plannedActions.Count} left)", this);
+            Logger.Info($"Gets order to start action execution ({PlannedActions.Count} left)", this);
             pending = true;
         }
 
         public void EndExecution() 
         {
-            Logger.Info($"Finishes action execution ({plannedActions.Count} left)", this);
-            pending = false; 
+            Logger.Info($"Finishes action execution ({PlannedActions.Count} left)", this);
+            pending = false;
+
+            // Maybe refactor in future
+            DestinationRoom = CurrentRoom;
         }
 
         public override void Update(GameWorld world, float deltaTime)
