@@ -22,22 +22,16 @@ namespace InvadedGame.Game.GamePhases
 
         private IPhaseController activeController;
 
-        public PhaseManager(
-            string name,
-            GameWorld world,
-            IPhaseController planningController,
-            IPhaseController executionController,
-            IPhaseController endController)
-            : base(name)
+        public PhaseManager(string name, GameWorld world) : base(name)
         {
-            this.planningController = planningController;
-            this.executionController = executionController;
-            this.endController = endController;
+            planningController = new PlanningPhaseController();
+            executionController = new ExecutionPhaseController();
+            endController = new EndPhaseController();
 
-            activeController = this.planningController;
+            activeController = planningController;
             activeController.OnEnter(world, 0);
 
-            Logger.Info($"Entering initial phase - {CurrentPhase.ToString()}", this);
+            Logger.Debug($"Entering initial phase - {CurrentPhase.ToString()}", this);
         }
 
         private void SwitchToNextPhase(GameWorld world, float deltaTime)
