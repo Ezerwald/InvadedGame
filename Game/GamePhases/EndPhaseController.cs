@@ -13,7 +13,7 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
-            Logger.Debug("Entering End Phase...");
+            Logger.Info("Entering End Phase...");
 
             endPhaseEffects = world.Objects.OfType<IEndPhaseEffect>().ToList();
 
@@ -33,19 +33,16 @@ namespace InvadedGame.Game.GamePhases
             }
         }
 
-        public void OnEffectCompleted(GameObject effect)
+        public void OnEffectCompleted(IEndPhaseEffect effect)
         {
             endPhaseEffectsPending--;
+            effect.EndPhaseEffectCompleted -= OnEffectCompleted;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            Logger.Debug("Exiting End Phase.");
-
-            foreach (var effect in endPhaseEffects)
-            {
-                effect.EndPhaseEffectCompleted -= OnEffectCompleted;
-            }
+            Logger.Info("Exiting End Phase.");
+            Logger.PauseAndClear();
         }
 
         public void Update(GameWorld world, float deltaTime)
