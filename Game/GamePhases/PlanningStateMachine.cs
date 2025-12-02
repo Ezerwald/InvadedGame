@@ -19,7 +19,8 @@ namespace InvadedGame.Game.GamePhases
         private readonly List<ActionTypes> baseActions = new()
         {
             ActionTypes.MoveAction,
-            ActionTypes.RepairRoomAction
+            ActionTypes.RepairRoomAction,
+            ActionTypes.BreakRoomAction
         };
 
         public PlanningStateMachine(GameWorld world)
@@ -132,7 +133,12 @@ namespace InvadedGame.Game.GamePhases
 
                 case ActionTypes.RepairRoomAction:
                     AddRepairRoomAction(menu.Actor);
-                    ShowActorMenu(menu.Actor); // stay on actor menu
+                    ShowActorMenu(menu.Actor);
+                    break;
+
+                case ActionTypes.BreakRoomAction:
+                    AddBreakRoomAction(menu.Actor);
+                    ShowActorMenu(menu.Actor);
                     break;
             }
         }
@@ -189,6 +195,11 @@ namespace InvadedGame.Game.GamePhases
         private void AddRepairRoomAction(Actor actor)
         {
             actor.PlanAction(new RepairRoomAction());
+        }
+
+        private void AddBreakRoomAction(Actor actor)
+        {
+            actor.PlanAction(new BreakRoomAction());
         }
     }
 }
