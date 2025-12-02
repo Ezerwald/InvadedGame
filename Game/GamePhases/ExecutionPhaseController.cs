@@ -15,6 +15,8 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnEnter(GameWorld world, float deltaTime)
         {
+            Logger.Info("Entering Execution Phase...");
+
             IsCompleted = false;
 
             round = 0;
@@ -50,14 +52,14 @@ namespace InvadedGame.Game.GamePhases
         {
             Logger.Info($"Finishes Round *{round}* action.", actor);
             actorsPending--;
+            actor.ActionCompleted -= OnActionCompleted;
         }
 
         public void OnExit(GameWorld world, float deltaTime)
         {
-            foreach (var actor in activeActors)
-            {
-                actor.ActionCompleted -= OnActionCompleted;
-            }
+            Logger.Info("Exiting Execution Phase");
+
+            Logger.PauseAndClear();
         }
 
         public void Update(GameWorld world, float deltaTime)
