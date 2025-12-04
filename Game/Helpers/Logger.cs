@@ -6,12 +6,22 @@ namespace InvadedGame.Game.Helpers
 {
     public static class Logger
     {
-        public static bool EnableLogger { get; set; } = true;
-        public static bool EnableDebug { get; set; } = false;
-        public static bool EnableInfo { get; set; } = false;
-        public static bool EnableWarn { get; set; } = true;
-        public static bool EnableError { get; set; } = true;
-        public static bool EnableRender { get; set; } = true;
+        static Logger()
+        {
+            EnableLogger = true;
+            EnableDebug = false;
+            EnableInfo = false;
+            EnableWarn = true;
+            EnableError = true;
+            EnableRender = true;
+        }
+
+        public static bool EnableLogger { get; set; }
+        public static bool EnableDebug { get; set; }
+        public static bool EnableInfo { get; set; }
+        public static bool EnableWarn { get; set; }
+        public static bool EnableError { get; set; }
+        public static bool EnableRender { get; set; }
 
         private static string Timestamp =>
             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
