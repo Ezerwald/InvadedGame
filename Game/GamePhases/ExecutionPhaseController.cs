@@ -50,7 +50,21 @@ namespace InvadedGame.Game.GamePhases
 
         public void OnActionCompleted(Actor actor)
         {
-            Logger.Info($"Finishes Round *{round}* action.", actor);
+            switch (actor)
+            {
+                case CrewActor crew:
+                    Logger.Info($"(Crew) Finishes Round *{round}* action.", crew);
+                    break;
+
+                case AlienActor enemy:
+                    Logger.Info($"(Enemy) Finishes Round *{round}* action.", enemy);
+                    break;
+
+                default:
+                    Logger.Info($"Finishes Round *{round}* action.", actor);
+                    break;
+            }
+            
             actorsPending--;
             actor.ActionCompleted -= OnActionCompleted;
         }
