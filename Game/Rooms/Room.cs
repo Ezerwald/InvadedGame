@@ -8,13 +8,26 @@ using System.Xml.Linq;
 
 namespace InvadedGame.Game.Rooms
 {
-    public abstract class Room : GameObject
+    public abstract class Room : GameObject, IFormattable
     {
         public bool IsOperational { get; set; } = true;
 
         public Room(string name):base(name) { }
 
-        public override string ToString() => $"{Name} ({(IsOperational ? "Operational" : "Broken")})";
+        public override string ToString()
+            => ToString("short", null);
 
+        public string ToString(string? format, IFormatProvider? formatProvider)
+        {
+            format = format?.ToLowerInvariant();
+
+            return format switch
+            {
+                "short" => Name,
+                "status" => $"{Name} ({(IsOperational ? "Operational" : "Broken")})",
+                "debug" => $"Room(Name={Name}, IsOperational={IsOperational})",
+                _ => Name
+            };
+        }
     }
 }
