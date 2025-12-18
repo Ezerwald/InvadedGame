@@ -135,7 +135,7 @@ namespace InvadedGame.Game.Menu
             Console.WriteLine("Choose destination:");
 
             for (int i = 0; i < menu.Rooms.Count; i++)
-                Console.WriteLine($"{i + 1}. {menu.Rooms[i].Name}");
+                Console.WriteLine($"{i + 1}. {menu.Rooms[i].ToString("status", null)}");
 
             Console.WriteLine();
             Console.WriteLine("B. Back");
