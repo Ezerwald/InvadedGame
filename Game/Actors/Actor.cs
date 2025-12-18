@@ -13,7 +13,7 @@ namespace InvadedGame.Game.Actors
 
         public Room DestinationRoom { get; internal set; }
 
-        public List<GameAction> PlannedActions = new();
+        public ActionQueue<GameAction> PlannedActions { get; } = new();
 
         public bool HasPlannedActions => PlannedActions.Count > 0;
 
@@ -27,14 +27,16 @@ namespace InvadedGame.Game.Actors
         }
 
         public void PlanAction(GameAction action)
-        {
-            PlannedActions.Add(action);
-        }
+        => PlannedActions.Enqueue(action);
 
         public void ExecuteNextAction(GameWorld world, float deltaTime)
         {
-            var action = PlannedActions[0];
-            PlannedActions.RemoveAt(0);
+            var action = PlannedActions.Dequeue();
+            
+            if (action == null)
+            {
+                return;
+            }
 
             action.Execute(world, this, deltaTime);
 
