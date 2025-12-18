@@ -1,9 +1,10 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actors;
 
+
 namespace InvadedGame.Game.Actions
 {
-    public abstract class GameAction
+    public abstract class GameAction : ICloneable
     {
         public string Name { get; }
 
@@ -13,5 +14,7 @@ namespace InvadedGame.Game.Actions
         }
 
         public abstract void Execute(GameWorld world, Actor actor, float deltaTime);
+
+        public abstract object Clone();
     }
 }
