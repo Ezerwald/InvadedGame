@@ -113,10 +113,11 @@ namespace InvadedGame.Game.Menu
             {
                 Console.WriteLine();
                 Console.WriteLine("PLANNED ACTIONS:");
-                List<GameAction> plannedActions = actor.PlannedActions;
-                for (int i = 0; i < plannedActions.Count; i++)
+                int idx = 0;
+                foreach (var plannedAction in actor.PlannedActions)
                 {
-                    Console.WriteLine($" - {plannedActions[i].Name}");
+                    Console.WriteLine($" - {plannedAction.Name}");
+                    idx++;
                 }
             }
 
