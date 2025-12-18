@@ -1,5 +1,6 @@
 ﻿using InvadedGame.Engine;
 using InvadedGame.Game.Actions;
+using InvadedGame.Game.Exceptions;
 using InvadedGame.Game.Helpers;
 using InvadedGame.Game.Rooms;
 
@@ -32,16 +33,30 @@ namespace InvadedGame.Game.Actors
         public void ExecuteNextAction(GameWorld world, float deltaTime)
         {
             var action = PlannedActions.Dequeue();
-            
+
             if (action == null)
-            {
                 return;
+
+            try
+            {
+                action.Execute(world, this, deltaTime);
             }
-
-            action.Execute(world, this, deltaTime);
-
-            ActionCompleted?.Invoke(this);
+            catch (MovementException ex)
+            {
+                // Expected domain error (game rule violation)
+                Logger.Warn(ex.Message, this);
+            }
+            catch (Exception ex)
+            {
+                // Unexpected error – should never happen, but we guard anyway
+                Logger.Error($"Unexpected error during action execution: {ex.Message}", this);
+            }
+            finally
+            {
+                ActionCompleted?.Invoke(this);
+            }
         }
+
 
         public void StartExecution()
         {
