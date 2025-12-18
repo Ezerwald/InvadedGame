@@ -24,5 +24,8 @@ namespace InvadedGame.Game.Actions
                 Logger.Render($"Room {room.Name} is already broken", actor);
             }
         }
+
+        public override object Clone()
+        => new BreakRoomAction();
     }
 }

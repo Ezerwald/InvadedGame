@@ -22,5 +22,8 @@ namespace InvadedGame.Game.Actions
                 Logger.Render($"Room {room.Name} doesn't need repairing", actor);
             }
         }
+
+        public override object Clone()
+        => new RepairRoomAction();
     }
 }
